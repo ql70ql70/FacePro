@@ -23,6 +23,61 @@ mpz_class FME(mpz_class x, mpz_class n, const mpz_class& m) {
     return d;
 }
 
+int jacobi(mpz_class a, mpz_class n)
+{
+    int ans = 0;
+
+    if (a == 0) {
+        ans = ((n == 1) ? 1 : 0);
+    }
+
+    else if (a == 2) {
+        n = n % 8;
+        if ((n == 1) || (n == 7)) {
+            ans = 1;
+        }
+
+        else if ((n == 3) || (n == 5)) {
+            ans = -1;
+        }
+    }
+
+    else if (a >= n) {
+        a = a % n;
+        ans = jacobi(a, n);
+    }
+
+    else if (a % 2 == 0) {
+        
+        ans = jacobi(2, n) * jacobi(a / 2, n);
+    }
+
+    else {
+        ans = ((a % 4 == 3 && n % 4 == 3) ? -jacobi(n, a) : jacobi(n, a));
+    }
+
+    return ans;
+
+}
+
+//Goldwasser_Micali加密，公钥N、delta，私钥p、q，加密的明文一个0或者1，得到的密文是homomorphism_ciphertext
+void Goldwasser_Micali_encrypt_abit(const mpz_class& N, const mpz_class& p, const mpz_class& q, const mpz_class& delta, const bool& binary, mpz_class& ran) {
+    std::string a_bit;
+
+    gmp_randclass rr(gmp_randinit_default);
+    rr.seed(time(NULL));//随机数种子。
+
+    int i;
+    ran = rr.get_z_range(N);
+    if ((gcd(ran, p) != 1) || (gcd(ran, q) != 1)) {
+        ran = ran + p + q;
+    }
+
+    ran = ((ran * ran) * (1 - binary + binary * delta)) % N;
+
+    return;
+}
+
 //Goldwasser_Micali加密，公钥N、delta，私钥p、q，加密的明文是01串binary_array，得到的密文是字符串homomorphism_ciphertext
 void Goldwasser_Micali_encrypt(const mpz_class& N, const mpz_class& p, const mpz_class& q, const mpz_class& delta, const std::bitset<SIZE_BIT_ARRAY>& binary_array, std::string& homomorphism_ciphertext) {
     homomorphism_ciphertext = "";
@@ -49,8 +104,8 @@ void Goldwasser_Micali_encrypt(const mpz_class& N, const mpz_class& p, const mpz
     return;
 }
 
-//使用私钥p，q解密一bit对应的密文a_bit_ciphertext，得到一个bool值
-bool Goldwasser_Micali_decrypt(const mpz_class& p, const mpz_class& q, mpz_class a_bit_ciphertext) {
+//使用快速幂算法和私钥p，q解密一bit对应的密文a_bit_ciphertext，得到一个bool值
+bool Goldwasser_Micali_decrypt_FME(const mpz_class& p, const mpz_class& q, mpz_class a_bit_ciphertext) {
     mpz_class exp;
     exp = ((p - 1) >> 1);
     a_bit_ciphertext = a_bit_ciphertext % p;
@@ -64,6 +119,14 @@ bool Goldwasser_Micali_decrypt(const mpz_class& p, const mpz_class& q, mpz_class
     }
 
     return true;
+}
+
+//使用雅各比符号和私钥p，q解密一bit对应的密文a_bit_ciphertext，得到一个bool值
+bool Goldwasser_Micali_decrypt(const mpz_class& p, const mpz_class& q, mpz_class a_bit_ciphertext) {
+    if ((jacobi(a_bit_ciphertext, p) + jacobi(a_bit_ciphertext, q)) == -2) {
+        return 1;
+    }
+    return 0;
 }
 
 //根据两个01串result_0和result_1，计算其汉明距离并逆向得到原始两向量欧几里得距离的估计值distance

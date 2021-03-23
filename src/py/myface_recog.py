@@ -1,5 +1,5 @@
 import face_recognition
-import cv2
+# import cv2
 
 
 def face_rec():

@@ -102,6 +102,7 @@ float Distance(float a[], float b[]) {
 	binaryzation(a_0, a_bit);
 	binaryzation(b_0, b_bit);
 
+
 	get_Hamming_Distance(a_bit, b_bit, d);
 
 	d_0 = pow(d, 0.5) / 640;
@@ -110,14 +111,25 @@ float Distance(float a[], float b[]) {
 	return d_0;
 }
 
+
+
 int main() {
+
+	float a_0[128];
+
+	int d = 0;
+
 	int i = 0;
 	std::cin >> i;
 	float test[128];
+	int jac;
+
+
+	mpz_class ran, ciper;
 
 	srand(time(NULL));
 
-	mpz_class n, p, q;
+	mpz_class n, key_p, key_q;
 	
 	while (i > -1) {
 		switch (i) {
@@ -218,8 +230,49 @@ int main() {
 
 			break;
 		case 7:
-			get_two_primes(p, q);
-			n = p * q;
+			get_two_primes(key_p, key_q);
+			n = key_p * key_q;
+			jac = 0;
+
+			gmp_randclass rr(gmp_randinit_default);
+			rr.seed(time(NULL));//随机数种子。
+
+			while (jac != -2) {
+				
+				
+				ran = rr.get_z_range(key_p);//生成[0, n - 1]的随机整数。
+
+				jac = jacobi(ran, key_q) + jacobi(ran, key_p);
+					
+			}
+
+			gmp_printf("(%Zd), %Zd = %Zd * %Zd\n", ran, n, key_p, key_q);
+			printf("70\n");
+
+
+			transformation1(Matrix, student_dkl_0, a_0);
+			transformation2(pos_x, pos_y, q, a_0);
+			binaryzation(a_0, a_bit);
+			printf("71\n", jac);
+
+
+			double start = clock();
+
+			for (i = 0; i != 5000; i++) {
+				Goldwasser_Micali_encrypt_abit(n, key_p, key_q, ran, 1, ciper);
+				jac = Goldwasser_Micali_decrypt(key_p, key_q, ciper);
+				printf("%d\n", i);
+				
+			}
+
+
+			double end = clock();
+			std::cout << end - start << std::endl;
+
+
+
+
+			printf("%d\n", jac);
 			
 			break;
 

@@ -6,8 +6,16 @@
 
 #define SIZE_BIT_ARRAY 128 * 640
 
+int jacobi(mpz_class a, mpz_class n);
+
+//Goldwasser_Micali加密，公钥N、delta，私钥p、q，加密的明文一个0或者1，得到的密文是homomorphism_ciphertext
+void Goldwasser_Micali_encrypt_abit(const mpz_class& N, const mpz_class& p, const mpz_class& q, const mpz_class& delta, const bool& binary, mpz_class& ran);
+
 //Goldwasser_Micali加密，公钥N、delta，私钥p、q，加密的明文是01串binary_array，得到的密文是字符串homomorphism_ciphertext
 void Goldwasser_Micali_encrypt(const mpz_class& N, const mpz_class& p, const mpz_class& q, const mpz_class& delta, const std::bitset<SIZE_BIT_ARRAY>& binary_array, std::string& homomorphism_ciphertext);
+
+//使用私钥p，q解密一bit对应的密文a_bit_ciphertext，得到一个bool值
+bool Goldwasser_Micali_decrypt_FME(const mpz_class& p, const mpz_class& q, mpz_class a_bit_ciphertext);
 
 //使用私钥p，q解密一bit对应的密文a_bit_ciphertext，得到一个bool值
 bool Goldwasser_Micali_decrypt(const mpz_class& p, const mpz_class& q, mpz_class a_bit_ciphertext);

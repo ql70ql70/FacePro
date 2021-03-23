@@ -166,6 +166,9 @@
     <ClInclude Include="head\sm23\test_sm2_sign_and_verify.h" />
     <ClInclude Include="head\transformations\transformations.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="src\py\myface_recog.py" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
