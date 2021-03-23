@@ -4,6 +4,8 @@
 #include "..\..\head\goldwasser_micali\goldwasser_micali.h"
 
 #include<iostream>
+#include <gmp.h>
+#include <gmpxx.h>
 
 #define SIZE 128
 
@@ -46,6 +48,44 @@ float student_dkl_2[SIZE] = {
 std::bitset<128 * 640> a_bit;
 std::bitset<128 * 640> b_bit;
 
+void get_two_primes(mpz_class& p, mpz_class& q) {
+
+	const char str[152] = "3273390607896141870013189696827599152216642046043064789483291368096133796404674554883270092325904157150886684127560071009217256545885393053328527589376";
+
+	//生成大素数算法
+	gmp_randstate_t grt;
+	gmp_randinit_default(grt); //设置随机数生成算法为默认
+	gmp_randseed_ui(grt, time(NULL)); //设置随机化种子为当前时间
+
+	mpz_t base, key_p, key_q;
+	mpz_init(base);
+	mpz_init(key_p); //初始化q和p大素数
+	mpz_init(key_q);
+
+	mpz_set_str(base, str, 10);
+
+	mpz_urandomb(key_p, grt, 256);//随机生成一个0-2^256的整数
+	mpz_urandomb(key_q, grt, 256);
+
+	mpz_add(key_p, key_p, base);
+	mpz_add(key_q, key_q, base);
+	
+	mpz_nextprime(key_p, key_p);  //使用GMP自带的素数生成函数
+	mpz_nextprime(key_q, key_q);
+
+	mpz_class p_0(key_p);
+	mpz_class q_0(key_q);
+
+	p = p_0;
+	q = q_0;
+
+	mpz_clear(base);
+	mpz_clear(key_p);
+	mpz_clear(key_q);
+
+	return;
+}
+
 float Distance(float a[], float b[]) {
 	float a_0[128];
 	float b_0[128];
@@ -76,6 +116,8 @@ int main() {
 	float test[128];
 
 	srand(time(NULL));
+
+	mpz_class n, p, q;
 	
 	while (i > -1) {
 		switch (i) {
@@ -175,6 +217,12 @@ int main() {
 			}
 
 			break;
+		case 7:
+			get_two_primes(p, q);
+			n = p * q;
+			
+			break;
+
 		}
 
 		std::cin >> i;
