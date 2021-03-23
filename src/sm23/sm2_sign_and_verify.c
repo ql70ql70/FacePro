@@ -13,9 +13,9 @@
 #include <openssl/bn.h>
 #include <openssl/ec.h>
 
-#include "C:\Users\70\workSpace\visualStidio\FacePro\head\sm23\sm2_cipher_error_codes.h"
-#include "C:\Users\70\workSpace\visualStidio\FacePro\head\sm23\sm3_with_preprocess.h"
-#include "C:\Users\70\workSpace\visualStidio\FacePro\head\sm23\sm2_sign_and_verify.h"
+#include "..\..\head\sm23\sm2_cipher_error_codes.h"
+#include "..\..\head\sm23\sm3_with_preprocess.h"
+#include "..\..\head\sm23\sm2_sign_and_verify.h"
 
 /*********************************************************/
 int sm2_sign_data_test(const unsigned char *message,

@@ -9,7 +9,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "C:\Users\70\workSpace\visualStidio\FacePro\head\sm23\test_sm2_sign_and_verify.h"
+#include "..\..\head\sm23\test_sm2_sign_and_verify.h"
 
 /********************************************************
 int main(void)

@@ -9,9 +9,9 @@
 
 #include <stdio.h>
 #include <string.h>
-#include "C:\Users\70\workSpace\visualStidio\FacePro\head\sm23\sm2_create_key_pair.h"
-#include "C:\Users\70\workSpace\visualStidio\FacePro\head\sm23\sm2_sign_and_verify.h"
-#include "C:\Users\70\workSpace\visualStidio\FacePro\head\sm23\test_sm2_sign_and_verify.h"
+#include "..\..\head\sm23\sm2_create_key_pair.h"
+#include "..\..\head\sm23\sm2_sign_and_verify.h"
+#include "..\..\head\sm23\test_sm2_sign_and_verify.h"
 
 /*********************************************************/
 int test_with_input_defined_in_standard(void)

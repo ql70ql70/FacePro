@@ -9,8 +9,8 @@
 
 #include <string.h>
 #include <openssl/evp.h>
-#include "C:\Users\70\workSpace\visualStidio\FacePro\head\sm23\sm2_cipher_error_codes.h"
-#include "C:\Users\70\workSpace\visualStidio\FacePro\head\sm23\sm3_with_preprocess.h"
+#include "..\..\head\sm23\sm2_cipher_error_codes.h"
+#include "..\..\head\sm23\sm3_with_preprocess.h"
 
 /*********************************************************/
 int sm3_digest_z(const unsigned char *id,

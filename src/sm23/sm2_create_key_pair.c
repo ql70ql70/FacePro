@@ -10,8 +10,8 @@
 #include <openssl/obj_mac.h>
 #include <openssl/bn.h>
 #include <openssl/ec.h>
-#include "C:\Users\70\workSpace\visualStidio\FacePro\head\sm23\sm2_cipher_error_codes.h"
-#include "C:\Users\70\workSpace\visualStidio\FacePro\head\sm23\sm2_create_key_pair.h"
+#include "..\..\head\sm23\sm2_cipher_error_codes.h"
+#include "..\..\head\sm23\sm2_create_key_pair.h"
 
 /*********************************************************/
 int sm2_create_key_pair(SM2_KEY_PAIR *key_pair)

@@ -3,8 +3,8 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <IncludePath>C:\Program Files\OpenSSL-Win64\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files\OpenSSL-Win64\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>H:\University_Files_2021_spring\environment building\OpenSSL-Win64\include;$(IncludePath)</IncludePath>
+    <LibraryPath>H:\University_Files_2021_spring\environment building\OpenSSL-Win64\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Link>

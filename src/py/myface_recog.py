@@ -1,20 +1,19 @@
 import face_recognition
 import cv2
 
-
 def face_rec():
     # write encodings to txt
     fp = open("face_encoding.txt", "w+")
     # load image encodings
     print("Model Initialized")
-    s_0 = input("图片编号：\n")
-    s1_image = face_recognition.load_image_file("C:/Users/70/Desktop/test/" + s_0 + ".jpg")
+    s1_image = face_recognition.load_image_file("H:\\University_Files_2021_spring\\cancelable_face_recognition\\test\\student_1\\student_1_0.jpg")
     s1_face_encoding = face_recognition.face_encodings(s1_image)[0]
     s1_list = s1_face_encoding.tolist()
     print("running")
 
     for ele in s1_list:
         fp.write(" " + str(ele))
+        print(ele)
 
     fp.close()
 
@@ -67,4 +66,5 @@ def face_rec():
     '''
     return
 
-# face_rec()
+
+face_rec()
