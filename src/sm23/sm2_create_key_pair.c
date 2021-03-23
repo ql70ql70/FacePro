@@ -24,6 +24,7 @@ int sm2_create_key_pair(SM2_KEY_PAIR *key_pair)
 	EC_POINT *ec_pt = NULL;
 	unsigned char pub_key_x[32], pub_key_y[32];
 
+
 	error_code = ALLOCATION_MEMORY_FAIL;
 	if ( !(ctx = BN_CTX_secure_new()) )
 	{
